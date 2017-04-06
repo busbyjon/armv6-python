@@ -70,6 +70,12 @@ RUN set -ex \
 # install "virtualenv", since the vast majority of users of this image will want it
 RUN pip install --no-cache-dir virtualenv
 
+#Install some other packages needed for scipy
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		gfortran \
+		liblapack-dev \
+	&& rm -rf /var/lib/apt/lists/*
+
 CMD ["python2"]
 
 RUN mkdir -p /usr/src/app
